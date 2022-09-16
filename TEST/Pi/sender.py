@@ -22,5 +22,14 @@ i = 0
 while True:
     i+=1
     print("Counter {} - Hello from Raspberry Pi".format(i))
-    ser.write('hello'.encode('utf-8'))
-    time.sleep(2)
+    pico1.write('hello'.encode('utf-8'))
+    time.sleep(1)
+    pico1.readline()
+    b = pico1.readline()
+    try:
+        msg = b.decode('utf-8')
+        print(type(msg))
+        print(">> " + msg)
+    except:
+        pass
+    time.sleep(1)
