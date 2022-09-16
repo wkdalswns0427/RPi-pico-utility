@@ -1,8 +1,16 @@
 # sender.py
 import time
 import serial
-ser = serial.Serial(
-  port='/dev/ttyS0', # Change this according to connection methods, e.g. /dev/ttyUSB0
+pico1 = serial.Serial(
+  port='/dev/ttyAMA1',
+  baudrate = 115200,
+  parity=serial.PARITY_NONE,
+  stopbits=serial.STOPBITS_ONE,
+  bytesize=serial.EIGHTBITS,
+  timeout=1
+)
+pico2 = serial.Serial(
+  port='/dev/ttyAMA4', # Change this according to connection methods, e.g. /dev/ttyUSB0
   baudrate = 115200,
   parity=serial.PARITY_NONE,
   stopbits=serial.STOPBITS_ONE,
