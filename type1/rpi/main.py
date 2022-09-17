@@ -4,14 +4,14 @@ import serial
 
 pico1 = serial.Serial(
   port='/dev/ttyAMA1',
-  baudrate = 115200,
+  baudrate = 9600,
   parity=serial.PARITY_NONE,
   stopbits=serial.STOPBITS_ONE,
   bytesize=serial.EIGHTBITS
 )
 pico2 = serial.Serial(
   port='/dev/ttyAMA4', # Change this according to connection methods, e.g. /dev/ttyUSB0
-  baudrate = 115200,
+  baudrate = 9600,
   parity=serial.PARITY_NONE,
   stopbits=serial.STOPBITS_ONE,
   bytesize=serial.EIGHTBITS
@@ -44,7 +44,7 @@ def main():
             time.sleep(0.1)
             b = pico1.read(2)
             msg = b.decode('utf-8')
-            if msg == "D":
+            if msg == "DN":
                 print("result :", sensor2)
                 print("program exit")
                 break
@@ -80,4 +80,7 @@ def main():
                 break
             sensor4.append(msg)
             print(msg)
+    #elif len(a)>1:
+        
+        
 main()

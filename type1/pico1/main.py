@@ -2,7 +2,10 @@
 import time
 import os
 import machine
-uart = machine.UART(1, 115200)
+from machine import Pin
+from random import *
+uart = machine.UART(1, baudrate=9600)
+led=Pin(25, Pin.OUT)
 
 def function1(endtime):
     init = time.time()
@@ -31,8 +34,9 @@ def function2(endtime):
         
 def main():
     sens, secs = None, None
+    led.high()
     while True:
-        if sens == None and uart.any():
+        if sens == None and uart.any()>0:
             sens = uart.readline().decode('utf-8')
             time.sleep(3)
             secs = int(uart.readline().decode('utf-8'))
@@ -43,6 +47,9 @@ def main():
         elif sens == "2":
             function2(secs)
             break
-    uart.write("D".encode('utf-8'))
+    uart.write("DN".encode('utf-8'))
+    led.low()
             
 main()
+
+
