@@ -19,47 +19,65 @@ pico2 = serial.Serial(
 msg = ""
 sensor1, sensor2, sensor3, sensor4 = [], [], [], []
 
-a = input("choose sensor : ")
-if a=="1" or a=="2":
-    pico1.write(a.encode('utf-8'))
-    t = input("declare time : ")
-    pico1.write(t.encode('utf-8'))
-    while True:
-        time.sleep(0.1)
-        b = pico1.read(1)
-        msg = b.decode('utf-8')
-        print(msg)
-        
-    
-elif a=="3":
-    pico2.write(a.encode('utf-8'))
-    t = input("declare time : ")
-    pico2.write(t.encode('utf-8'))
-    while True:
-        time.sleep(0.1)
-        b = pico2.read(1)
-        msg = b.decode('utf-8')
-        print(msg)
+def main():
+    a = input("choose sensor : ")
+    if a=="1":
+        pico1.write(a.encode('utf-8'))
+        t = input("declare time : ")
+        pico1.write(t.encode('utf-8'))
+        while True:
+            time.sleep(0.1)
+            b = pico1.read(1)
+            msg = b.decode('utf-8')
+            if msg == "D":
+                print("result :", sensor1)
+                print("program exit")
+                break
+            sensor1.append(msg)
+            print(msg)
+            
+    if a=="2":
+        pico1.write(a.encode('utf-8'))
+        t = input("declare time : ")
+        pico1.write(t.encode('utf-8'))
+        while True:
+            time.sleep(0.1)
+            b = pico1.read(2)
+            msg = b.decode('utf-8')
+            if msg == "D":
+                print("result :", sensor2)
+                print("program exit")
+                break
+            sensor2.append(msg)
+            print(msg)
+            
+    elif a=="3":
+        pico2.write(a.encode('utf-8'))
+        t = input("declare time : ")
+        pico2.write(t.encode('utf-8'))
+        while True:
+            time.sleep(0.1)
+            b = pico2.read(1)
+            msg = b.decode('utf-8')
+            if msg == "D":
+                print("result :", sensor3)
+                print("program exit")
+                break
+            sensor3.append(msg)
+            print(msg)
 
-elif a=="4":
-    pico2.write(a.encode('utf-8'))
-    t = input("declare time : ")
-    pico2.write(t.encode('utf-8'))
-    while True:
-        time.sleep(0.1)
-        b = pico2.read(2)
-        msg = b.decode('utf-8')
-        print(msg)
-
-'''
-while True:
-  time.sleep(0.1)
-  if a=="4":
-      b = pico2.read(2)
-  elif a=="3":
-      b = pico2.read(1)
-  elif a=="1" or a=="2":
-      b = pico1.read(1)
-  msg = b.decode('utf-8')
-  print(msg)
-'''
+    elif a=="4":
+        pico2.write(a.encode('utf-8'))
+        t = input("declare time : ")
+        pico2.write(t.encode('utf-8'))
+        while True:
+            time.sleep(0.1)
+            b = pico2.read(2)
+            msg = b.decode('utf-8')
+            if msg == "DN":
+                print("result :", sensor4)
+                print("program exit")
+                break
+            sensor4.append(msg)
+            print(msg)
+main()

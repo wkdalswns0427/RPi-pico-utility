@@ -12,5 +12,12 @@ RaspberryPi4 and PICO virtual sensor communication
 
 will use uart ports on ttyAMA1(Rx 28, Tx 27) and ttyAMA4(Rx 33, Tx 32)
 ---
+### Type 1
+using files in /type1
+
+This program chooses one sensor, and receives data via uart
+
+---
+
 UART PINMAP
 ![Screenshot from 2022-09-16 10-28-28](https://user-images.githubusercontent.com/68832065/190536895-26a9b863-89ed-415a-84b4-b041fe700060.png)

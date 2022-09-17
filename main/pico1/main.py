@@ -1,8 +1,8 @@
+# main.py for pico1
 import time
 import os
 import machine
-from random import *
-uart = machine.UART(0, 115200)
+uart = machine.UART(1, 115200)
 
 def function1(endtime):
     init = time.time()
@@ -35,13 +35,14 @@ def main():
         if sens == None and uart.any():
             sens = uart.readline().decode('utf-8')
             time.sleep(3)
-            secs = int(uart.readline().decode('utf-8'))          
+            secs = int(uart.readline().decode('utf-8'))
+            
         if sens == "1":
             function1(secs)
             break
         elif sens == "2":
             function2(secs)
             break
+    uart.write("D".encode('utf-8'))
             
 main()
-
