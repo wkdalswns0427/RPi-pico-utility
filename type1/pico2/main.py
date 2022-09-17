@@ -4,7 +4,6 @@ import machine
 from machine import Pin
 from random import *
 uart = machine.UART(1, 115200)
-print(uart)
 led=Pin(25, Pin.OUT)
 
 
@@ -36,7 +35,6 @@ def function4(endtime):
 def main():
     led.toggle()
     sens, secs = None, None
-    uart.write("I".encode('utf-8'))
     while True:
         if sens == None and uart.any():
             sens = uart.readline().decode('utf-8')
@@ -52,4 +50,3 @@ def main():
     led.toggle()
             
 main()
-
