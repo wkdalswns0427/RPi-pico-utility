@@ -34,10 +34,12 @@ def function4(endtime):
 
 def main():
     led.high()
+    state = False
     while True:
-        if uart.any()>0:
+        if uart.any()>0 and not state:
             data = uart.readline().decode('utf-8')
             data.split(",")
+            state = True
         if data[0] == "1":
             function3(int(data[1]))
             break

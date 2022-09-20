@@ -25,6 +25,7 @@ def main():
     data = a.split(",")
     no_of_sensors = int(data[0])
     
+    # <---------- use one sensor ----------> 
     if no_of_sensors==1:
         devlen = 1
         if int(data[1])%2==0:
@@ -38,12 +39,12 @@ def main():
                 b = pico1.read(devlen)
                 msg = b.decode('utf-8')
                 if msg == "D" or msg == "DH":
-                    print("result :", sensor1)
-                    print("program exit")
                     break
                 sensor1.append(msg)
                 print(msg)
             sensor1.append("data of sensor"+data[1]+","+data[2]+"secs")
+            print("result :", sensor1)
+            print("program exit")
                 
         elif data[1]=="3" or data[1]=="4":
             senddata = data[1]+","+data[2]
@@ -53,13 +54,14 @@ def main():
                 b = pico2.read(devlen)
                 msg = b.decode('utf-8')
                 if msg == "D":
-                    print("result :", sensor3)
-                    print("program exit")
                     break
                 sensor1.append(msg)
                 print(msg)
             sensor1.append("data of sensor"+data[1]+","+data[2]+"secs")
+            print("result :", sensor1)
+            print("program exit")
 
+    # <---------- use two sensors ----------> 
     elif no_of_sensors==2:
         devlen = [1,1]
         for i in range(2):
@@ -75,16 +77,12 @@ def main():
             d1,d2 = pico1.read(devlen[0]), pico2.read(devlen[1])
             msg1, msg2 = d1.decode('utf-8'), d2.decode('utf-8')
             if (msg1 == "DN" or msg1=="D") and (msg2 == "DN" or msg2=="D"):
-                print("result1 :", sensor4, "\n", "result2 :", sensor4,)
-                print("program exit")
                 break
             sensor1.append(msg1)
             sensor2.append(msg2)
         sensor1.append("data of sensor"+data[1]+","+data[2]+"secs")
         sensor2.append("data of sensor"+data[3]+","+data[4]+"secs")
+        print("result1 :", sensor1, "\n", "result2 :", sensor2)
+        print("program exit")
         
 main()
-
-# t = input("declare time in ordr (ex. \"10,15\"): ")
-# t = t.split(",")
-# print(type(t[0]))
