@@ -11,6 +11,7 @@ RaspberryPi4 and PICO virtual sensor communication
 - Protocol : Custom 8N1
 
 will use uart ports on ttyAMA1(Rx 28, Tx 27) and ttyAMA4(Rx 33, Tx 32)
+
 ---
 ### Type 1
 using files in /type1
