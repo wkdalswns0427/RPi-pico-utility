@@ -1,4 +1,3 @@
-# main.py for pico1
 import time
 import os
 import machine
@@ -38,15 +37,16 @@ def main():
     state = False
     while True:
         if uart.any()>0 and not state:
-            data = uart.readline().decode('utf-8')
-            data.split(",")
+            data = uart.read().decode('utf-8')
+            data = data.split(",")
+            print(data)
             state = True
-        if data[0] == "1":
-            function1(int(data[1]))
-            break
-        elif data[0] == "2":
-            function2(int(data[1]))
-            break
+            if data[0] == "1":
+                function1(int(data[1]))
+                break
+            elif data[0] == "2":
+                function2(int(data[1]))
+                break
     led.low()
             
 main()
