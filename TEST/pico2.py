@@ -37,15 +37,15 @@ def main():
     state = False
     while True:
         if uart.any()>0 and not state:
-            data = uart.readline().decode('utf-8')
-            data.split(",")
+            data = uart.read().decode('utf-8')
+            data = data.split(",")
             state = True
-        if data[0] == "1":
-            function3(int(data[1]))
-            break
-        elif data[0] == "2":
-            function4(int(data[1]))
-            break
+            if data[0] == "3":
+                function3(int(data[1]))
+                break
+            elif data[0] == "4":
+                function4(int(data[1]))
+                break
     led.low()
             
 main()
