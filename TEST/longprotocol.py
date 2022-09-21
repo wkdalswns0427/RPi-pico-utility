@@ -30,7 +30,7 @@ def main():
         devlen = 1
         if int(data[1])%2==0:
             devlen = 2
-
+        print("dev : {dev}, devlen : {devlen}".format(dev = data[1], devlen=devlen))
         if data[1]=="1" or data[1]=="2":
             senddata = data[1]+","+data[2]
             pico1.write(senddata.encode('utf-8'))
@@ -38,7 +38,7 @@ def main():
                 time.sleep(0.1)
                 b = pico1.read(devlen)
                 msg = b.decode('utf-8')
-                if msg == "D" or msg == "DH":
+                if msg == "D" or msg == "DN":
                     break
                 sensor1.append(msg)
                 print(msg)
@@ -53,7 +53,7 @@ def main():
                 time.sleep(0.1)
                 b = pico2.read(devlen)
                 msg = b.decode('utf-8')
-                if msg == "D":
+                if msg == "D" or msg == "DN":
                     break
                 sensor1.append(msg)
                 print(msg)
@@ -63,9 +63,10 @@ def main():
 
     # <---------- use two sensors ----------> 
     elif no_of_sensors==2:
+        print("mode two sensors : {sensor1}, {sensor2}".format(sensor1=data[1], sensor2=data[3]))
         devlen = [1,1]
         for i in range(2):
-            if int(a[i])%2==0:
+            if int(data[i*2+1])%2==0:
                 devlen[i] = 2
 
         senddata1 = data[1]+","+data[2]
@@ -80,6 +81,7 @@ def main():
                 break
             sensor1.append(msg1)
             sensor2.append(msg2)
+            print(msg1, " , ", msg2)
         sensor1.append("data of sensor"+data[1]+","+data[2]+"secs")
         sensor2.append("data of sensor"+data[3]+","+data[4]+"secs")
         print("result1 :", sensor1, "\n", "result2 :", sensor2)
