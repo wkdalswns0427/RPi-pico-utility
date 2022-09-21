@@ -18,6 +18,7 @@ def function3(endtime):
             time.sleep(1)
         if(time.time() - init)>endtime:
             break
+    uart.write("D".encode('utf-8'))
 
 def function4(endtime):
     init = time.time()
@@ -33,19 +34,18 @@ def function4(endtime):
 
 def main():
     led.high()
-    sens, secs = None, None
+    state = False
     while True:
-        if sens == None and uart.any()>0:
-            sens = uart.readline().decode('utf-8')
-            time.sleep(3)
-            secs = int(uart.readline().decode('utf-8'))  
-        if sens == "3":
-            function3(secs)
-            break
-        elif sens == "4":
-            function4(secs)
-            break
-    uart.write("D".encode('utf-8'))
-    led.tlow()
+        if uart.any()>0 and not state:
+            data = uart.read().decode('utf-8')
+            data = data.split(",")
+            state = True
+            if data[0] == "3":
+                function3(int(data[1]))
+                break
+            elif data[0] == "4":
+                function4(int(data[1]))
+                break
+    led.low()
             
 main()

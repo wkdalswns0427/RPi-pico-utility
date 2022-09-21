@@ -1,4 +1,3 @@
-# main.py for pico1
 import time
 import os
 import machine
@@ -20,6 +19,7 @@ def function1(endtime):
             break
         uart.write('0'.encode('utf-8'))
         time.sleep(1)
+    uart.write("D".encode('utf-8'))
 
 def function2(endtime):
     num = 50
@@ -30,25 +30,22 @@ def function2(endtime):
         uart.write(str(num).encode('utf-8'))
         time.sleep(2)
         num += 2
+    uart.write("DN".encode('utf-8'))
         
 def main():
-    sens, secs = None, None
     led.high()
+    state = False
     while True:
-        if sens == None and uart.any()>0:
-            sens = uart.readline().decode('utf-8')
-            time.sleep(3)
-            secs = int(uart.readline().decode('utf-8'))
-            
-        if sens == "1":
-            function1(secs)
-            break
-        elif sens == "2":
-            function2(secs)
-            break
-    uart.write("DN".encode('utf-8'))
+        if uart.any()>0 and not state:
+            data = uart.read().decode('utf-8')
+            data = data.split(",")
+            state = True
+            if data[0] == "1":
+                function1(int(data[1]))
+                break
+            elif data[0] == "2":
+                function2(int(data[1]))
+                break
     led.low()
             
 main()
-
-
