@@ -39,7 +39,6 @@ def main():
         if uart.any()>0 and not state:
             data = uart.read().decode('utf-8')
             data = data.split(",")
-            print(data)
             state = True
             if data[0] == "1":
                 function1(int(data[1]))
