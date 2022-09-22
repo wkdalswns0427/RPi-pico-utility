@@ -30,6 +30,32 @@ using files in /type2
 
 This program chooses **two sensors**, and receives data via uart
 
+input : "no_of_sens,sensorno1,time1,sensorno2,time2" seperated by comma
+
+connect (may need usb connection, automatic init nor resolved)
+- RPi(GPIO27,GPIO28) and PICO1(GPIO5, GPIO4)
+- RPi(GPIO32,GPIO33) and PICO2(GPIO5, GPIO4)
+
+turn on "Thonny" on raspberry pi
+- open 'main.py' and run
+- type in sensor no & time on terminal
+
+single sensor
+
+![Screenshot from 2022-09-22 10-39-37](https://user-images.githubusercontent.com/68832065/191639566-d77f5115-006d-4b3c-ae2e-30aca63defcb.png)
+
+double sensor
+
+![Screenshot from 2022-09-22 10-25-52](https://user-images.githubusercontent.com/68832065/191638172-ce735787-d74b-48cd-a46a-a5e49ad87b93.png)
+
+---
+### Type 4
+using files in /type2
+
+This program chooses **four sensors**, and receives data via uart
+
+input : "no_of_sens,sensor1,time1,sensor2,time2,sensor3,time3,sensor4,time4" seperated by comma
+
 connect (may need usb connection, automatic init nor resolved)
 - RPi(GPIO27,GPIO28) and PICO1(GPIO5, GPIO4)
 - RPi(GPIO32,GPIO33) and PICO2(GPIO5, GPIO4)
