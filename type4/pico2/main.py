@@ -6,17 +6,22 @@ from random import *
 uart = machine.UART(1, 9600)
 led=machine.Pin(25, machine.Pin.OUT)
 
+# baton = _thread.allocate_lock()
 
 def function3(endtime):
     init = time.time()
     while True:
         looptime = time.time()
         while(time.time()-looptime)<5 and (time.time()-init)<endtime:
+            # baton.acquire()
             uart.write('1'.encode('utf-8'))
             time.sleep(1)
+            # baton.release()
         while(time.time()-looptime)>=5 and (time.time()-looptime)<=10 and (time.time()-init)<endtime:
+            # baton.acquire()
             uart.write('0'.encode('utf-8'))
             time.sleep(1)
+            # baton.release()
         if(time.time() - init)>endtime:
             break
     uart.write("D".encode('utf-8'))
@@ -26,11 +31,13 @@ def function4(endtime):
     while True:
         if(time.time() - init) > endtime:
             break
+        # baton.acquire()
         num = str(randint(0,100))
         if len(num)==1:
             num = "0"+num
         uart.write(num.encode('utf-8'))
         time.sleep(0.1)
+        # baton.release()
     uart.write("DN".encode('utf-8'))
 
 def main():

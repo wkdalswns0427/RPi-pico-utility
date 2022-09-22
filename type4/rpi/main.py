@@ -87,6 +87,7 @@ def main():
         print("result1 :", sensor1, "\n", "result2 :", sensor2)
         print("program exit")
 
+    # <---------- use four sensors ----------> 
     elif no_of_sensors==4:
         print("mode all sensors")
         senddata1 = data[1]+","+data[2]+","+data[3]+","+data[4]
