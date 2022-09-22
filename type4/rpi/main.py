@@ -9,6 +9,15 @@ pico1 = serial.Serial(
   stopbits=serial.STOPBITS_ONE,
   bytesize=serial.EIGHTBITS
 )
+
+pico1_1 = serial.Serial(
+  port='/dev/ttyAMA2',
+  baudrate = 9600,
+  parity=serial.PARITY_NONE,
+  stopbits=serial.STOPBITS_ONE,
+  bytesize=serial.EIGHTBITS
+)
+
 pico2 = serial.Serial(
   port='/dev/ttyAMA4', # Change this according to connection methods, e.g. /dev/ttyUSB0
   baudrate = 9600,
@@ -16,6 +25,15 @@ pico2 = serial.Serial(
   stopbits=serial.STOPBITS_ONE,
   bytesize=serial.EIGHTBITS
 )
+
+pico2_1 = serial.Serial(
+  port='/dev/ttyAMA3', # Change this according to connection methods, e.g. /dev/ttyUSB0
+  baudrate = 9600,
+  parity=serial.PARITY_NONE,
+  stopbits=serial.STOPBITS_ONE,
+  bytesize=serial.EIGHTBITS
+)
+
 msg = ""
 sensor1, sensor2, sensor3, sensor4 = [], [], [], []
 
@@ -94,15 +112,22 @@ def main():
         senddata2 = data[5]+","+data[6]+","+data[7]+","+data[8]
         pico1.write(senddata1.encode('utf-8'))
         pico2.write(senddata2.encode('utf-8'))
+        begin = time.time()
         while True:
-            # if pico1.read()>0:
-            d1,d2 = pico1.read(1), pico1.read(2)
-            d3,d4 = pico2.read(1), pico2.read(2)
+            if (begin - time.time())<int(data[2]):
+                d1 = pico1.read(1)
+            if (begin - time.time())<int(data[4]):
+                d2 = pico1_1.read(2)
+            if (begin - time.time())<int(data[4]):
+                d4 = pico2.read(2)
+            if (begin - time.time())<int(data[4]):
+                d3 = pico2_1.read(1)
             msg1, msg2, msg3, msg4  = d1.decode('utf-8'), d2.decode('utf-8'), d3.decode('utf-8'), d4.decode('utf-8')
             if (msg1 == "DN" or msg1=="D") and (msg2 == "DN" or msg2=="D"):
                 break
             sensor1.append(msg1)
-            sensor2.append(msg2)
+            if msg!="00":
+                sensor2.append(msg2)
             sensor3.append(msg3)
             sensor4.append(msg4)
             print(msg1, msg2, msg3, msg4)
