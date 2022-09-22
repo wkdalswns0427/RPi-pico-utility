@@ -93,7 +93,14 @@ def main():
         pico2.write(senddata2.encode('utf-8'))
         while True:
             time.sleep(0.1)
-            d1,d2 = pico1.read(devlen[0]), pico2.read(devlen[1])
+            if devlen[0]==1:
+                d1 = pico1.read(devlen[0])
+            else:
+                d1 = pico1_1.read(devlen[0])
+            if devlen[1]==1:
+                d2 = pico2.read(devlen[1])
+            else:
+                d2 = pico2_1.read(devlen[1])
             msg1, msg2 = d1.decode('utf-8'), d2.decode('utf-8')
             if (msg1 == "DN" or msg1=="D") and (msg2 == "DN" or msg2=="D"):
                 break
