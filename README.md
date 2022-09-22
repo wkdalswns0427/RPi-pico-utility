@@ -56,9 +56,15 @@ This program chooses **four sensors**, and receives data via uart
 
 input : "no_of_sens,sensor1,time1,sensor2,time2,sensor3,time3,sensor4,time4" seperated by comma
 
-connect (may need usb connection, automatic init nor resolved)
-- RPi(GPIO27,GPIO28) and PICO1(GPIO5, GPIO4)
-- RPi(GPIO32,GPIO33) and PICO2(GPIO5, GPIO4)
+connect (may need usb connection, automatic init not resolved)
+
+PICO1
+- RPi(GPIO27,GPIO28) and PICO1(GPIO5, GPIO4) : AMA1 sensor1
+- RPi(GPIO07,GPIO29) and PICO1(GPIO2, GPIO1) : AMA2 sensor2
+
+PICO2
+- RPi(GPIO32,GPIO33) and PICO2(GPIO5, GPIO4) : AMA4 sensor3
+- RPi(GPIO24,GPIO21) and PICO1(GPIO2, GPIO1) : AMA3 sensor4
 
 turn on "Thonny" on raspberry pi
 - open 'main.py' and run
