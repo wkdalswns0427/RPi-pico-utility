@@ -119,6 +119,9 @@ def main():
             print(msg1, " , ", msg2)
         sensor1.append("data of sensor"+data[1]+","+data[2]+"secs")
         sensor2.append("data of sensor"+data[3]+","+data[4]+"secs")
+        remove_set = {""}
+        sensor1 = [i for i in sensor1 if i not in remove_set]
+        sensor2 = [i for i in sensor2 if i not in remove_set]
         print("result1 :", sensor1, "\n", "result2 :", sensor2)
         print("program exit")
 
@@ -152,6 +155,12 @@ def main():
         sensor2.append("data of sensor"+data[3]+","+data[4]+"secs")
         sensor3.append("data of sensor"+data[5]+","+data[6]+"secs")
         sensor4.append("data of sensor"+data[7]+","+data[8]+"secs")
+        remove_set = {""}
+        sensor1 = [i for i in sensor1 if i not in remove_set]
+        sensor2 = [i for i in sensor2 if i not in remove_set]
+        sensor3 = [i for i in sensor3 if i not in remove_set]
+        sensor4 = [i for i in sensor4 if i not in remove_set]
+
         print("result1 :", sensor1, "\n", "result2 :", sensor2)
         print("result3 :", sensor3, "\n", "result4 :", sensor4)
         print("program exit")
