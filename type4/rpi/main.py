@@ -64,8 +64,12 @@ def main():
             pico1.write(senddata.encode('utf-8'))
             while True:
                 time.sleep(0.1)
-                b = pico1.read(devlen)
-                msg = b.decode('utf-8')
+                if data[1]=="1":
+                    b = pico1.read(devlen)
+                    msg = b.decode('utf-8')
+                elif data[1]=="2":
+                    b = pico1_1.read(devlen)
+                    msg = b.decode('utf-8')
                 if msg == "D" or msg == "DN":
                     break
                 sensor1.append(msg)
@@ -79,8 +83,12 @@ def main():
             pico2.write(senddata.encode('utf-8'))
             while True:
                 time.sleep(0.1)
-                b = pico2.read(devlen)
-                msg = b.decode('utf-8')
+                if data[1]=="3":
+                    b = pico2_1.read(devlen)
+                    msg = b.decode('utf-8')
+                elif data[1]=="4":
+                    b = pico2.read(devlen)
+                    msg = b.decode('utf-8')
                 if msg == "D" or msg == "DN":
                     break
                 sensor1.append(msg)
@@ -119,7 +127,7 @@ def main():
             print(msg1, " , ", msg2)
         sensor1.append("data of sensor"+data[1]+","+data[2]+"secs")
         sensor2.append("data of sensor"+data[3]+","+data[4]+"secs")
-        remove_set = {""}
+        remove_set = {"","D","DN"}
         sensor1 = [i for i in sensor1 if i not in remove_set]
         sensor2 = [i for i in sensor2 if i not in remove_set]
         print("result1 :", sensor1, "\n", "result2 :", sensor2)
@@ -155,7 +163,7 @@ def main():
         sensor2.append("data of sensor"+data[3]+","+data[4]+"secs")
         sensor3.append("data of sensor"+data[5]+","+data[6]+"secs")
         sensor4.append("data of sensor"+data[7]+","+data[8]+"secs")
-        remove_set = {""}
+        remove_set = {"","D","DN"}
         sensor1 = [i for i in sensor1 if i not in remove_set]
         sensor2 = [i for i in sensor2 if i not in remove_set]
         sensor3 = [i for i in sensor3 if i not in remove_set]
