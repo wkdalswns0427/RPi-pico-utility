@@ -51,7 +51,7 @@ def main():
             data = data.split(",")
             state = True
             if len(data) > 2:
-                _thread.start_new_thread(function3, tuple(map(int, data[1])))
+                _thread.start_new_thread(function3, (int(data[1],)))
                 function4(int(data[3]))
             else:
                 if data[0] == "3":

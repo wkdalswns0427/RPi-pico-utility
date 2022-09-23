@@ -89,7 +89,7 @@ PICO2
 turn on "Thonny" on raspberry pi
 
 - open 'main.py' and run
-- type in sensor no & time on terminal
+- type in sensor no & time on terminal according to protocol
 
 ---
 Connection Image
