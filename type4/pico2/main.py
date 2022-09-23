@@ -7,6 +7,7 @@ uart0 = machine.UART(0, 9600)
 uart1 = machine.UART(1, 9600)
 led=machine.Pin(25, machine.Pin.OUT)
 
+# ttyAMA1 --> uart1 ttyAMA2 --> uart0
 baton = _thread.allocate_lock()
 
 def function3(endtime):

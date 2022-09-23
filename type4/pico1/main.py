@@ -3,9 +3,11 @@ import os
 import machine
 from random import *
 import _thread
-uart = machine.UART(1, baudrate=9600)
+uart1 = machine.UART(1, baudrate=9600)
+uart0 = machine.UART(0, baudrate=9600)
 led=machine.Pin(25, machine.Pin.OUT)
 
+# ttyAMA4 --> uart1 ttyAMA3 --> uart0
 # uart data lock for anti-corruption
 baton = _thread.allocate_lock()
 
@@ -18,16 +20,16 @@ def function1(endtime):
             baton.acquire()
             if (time.time()-init) > endtime:
                 break
-            uart.write('1'.encode('utf-8'))
+            uart1.write('1'.encode('utf-8'))
             time.sleep(1)
             baton.release()
         if (time.time()-init) > endtime:
             break
         baton.acquire()
-        uart.write('0'.encode('utf-8'))
+        uart1.write('0'.encode('utf-8'))
         time.sleep(1)
         baton.release()
-    uart.write("D".encode('utf-8'))
+    uart1.write("D".encode('utf-8'))
 
 def function2(endtime):
     num = 50
@@ -36,20 +38,20 @@ def function2(endtime):
         if (time.time()-init) > endtime:
             break
         baton.acquire()
-        uart.write(str(num).encode('utf-8'))
+        uart0.write(str(num).encode('utf-8'))
         time.sleep(1)
-        uart.write("00".encode('utf-8'))
+        uart0.write("00".encode('utf-8'))
         time.sleep(1)
         baton.release()
         num += 2
-    uart.write("DN".encode('utf-8'))
+    uart0.write("DN".encode('utf-8'))
         
 def main():
     led.high()
     state = False
     while True:
-        if uart.any()>0 and not state:
-            data = uart.read().decode('utf-8')
+        if uart1.any()>0 and not state:
+            data = uart1.read().decode('utf-8')
             data = data.split(",")
             state = True
             if len(data) > 2:

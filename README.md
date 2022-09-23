@@ -6,7 +6,7 @@ RaspberryPi4 and PICO virtual sensor communication
 
 ### HW config
 
-- Raspberry Pi 4B 8Gb [raspbeeypiOS 64bit]
+- Raspberry Pi 4B 8Gb [raspberrypiOS 64bit]
 - Raspberry Pi PICO [sensor1 sensor2, micropython]
 - Raspberry Pi PICO [sensor3 sensor4, micropython]
 
@@ -17,7 +17,7 @@ RaspberryPi4 and PICO virtual sensor communication
 - Interface : UART
 - Protocol : Custom 8N1
 
-will use uart ports on ttyAMA1(Rx 28, Tx 27) and ttyAMA4(Rx 33, Tx 32)
+will use uart ports on ttyAMA1 to ttyAMA4 of raspberry pi4
 
 ---
 
@@ -46,15 +46,15 @@ This program chooses **two sensors**, and receives data via uart
 
 input : "no_of_sens,sensorno1,time1,sensorno2,time2" seperated by comma
 
-connect (may need usb connection, automatic init nor resolved)
+connect (need usb connection, automatic init not resolved)
 
 - RPi(GPIO27,GPIO28) and PICO1(GPIO5, GPIO4)
 - RPi(GPIO32,GPIO33) and PICO2(GPIO5, GPIO4)
 
 turn on "Thonny" on raspberry pi
 
-- open 'main.py' and run
-- type in sensor no & time on terminal
+- open 'main.py' from pico and run (repeat for another pico)
+- type in sensor no & time according to protocol on terminal
 
 single sensor
 

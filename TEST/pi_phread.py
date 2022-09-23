@@ -1,6 +1,7 @@
 # rpi4 code
 import time
 import serial
+from threading import Thread
 
 pico1 = serial.Serial(
   port='/dev/ttyAMA1',
@@ -36,6 +37,42 @@ pico2_1 = serial.Serial(
 
 msg = ""
 sensor1, sensor2, sensor3, sensor4 = [], [], [], []
+
+def read_sensor(sens, begin, t):
+    out = []
+    if sens == 1:
+        while (begin - time.time())<t:
+                d1 = pico1.read(1)
+                msg1 = d1.decode('utf-8')
+                out.append(msg1)
+                print("1 : ", msg1)
+                if msg1 == "DN" or msg1=="D":
+                    break
+    elif sens == 2:
+        while (begin - time.time())<t:
+                d2 = pico1_1.read(2)
+                msg2 = d2.decode('utf-8')
+                out.append(msg2)
+                print("2 : ", msg2)
+                if msg2 == "DN" or msg2=="D":
+                    break
+    elif sens == 3:
+        while (begin - time.time())<t:
+                d3 = pico2_1.read(1)
+                msg3 = d3.decode('utf-8')
+                out.append(msg3)
+                print("3 : ", msg3)
+                if msg3 == "DN" or msg3=="D":
+                    break
+    elif sens == 4:
+        while (begin - time.time())<t:
+                d4 = pico2.read(2)
+                msg4 = d4.decode('utf-8')
+                out.append(msg4)
+                print("4 : ", msg4)
+                if msg4 == "DN" or msg4=="D":
+                    break
+    return out
 
 def main():
     print("type in according to protocol \"no_of_sens,sensorno1,time1,sensorno2,time2\"")
@@ -120,24 +157,15 @@ def main():
         pico1.write(senddata1.encode('utf-8'))
         pico2.write(senddata2.encode('utf-8'))
         begin = time.time()
-        while True:
-            if (begin - time.time())<int(data[2]):
-                d1 = pico1.read(1)
-            if (begin - time.time())<int(data[4]):
-                d2 = pico1_1.read(2)
-            if (begin - time.time())<int(data[8]):
-                d4 = pico2.read(2)
-            if (begin - time.time())<int(data[6]):
-                d3 = pico2_1.read(1)
-            msg1, msg2, msg3, msg4  = d1.decode('utf-8'), d2.decode('utf-8'), d3.decode('utf-8'), d4.decode('utf-8')
-            if (msg1 == "DN" or msg1=="D") and (msg2 == "DN" or msg2=="D"):
-                break
-            sensor1.append(msg1)
-            if msg!="00":
-                sensor2.append(msg2)
-            sensor3.append(msg3)
-            sensor4.append(msg4)
-            print(msg1, msg2, msg3, msg4)
+        d1Thread = Thread(target=read_sensor, args=(tuple(map(1)),tuple(map(begin)),tuple(map(int,data[2]))))
+        d2Thread = Thread(target=read_sensor, args=(tuple(map(2)),tuple(map(begin)),tuple(map(int,data[4]))))
+        d3Thread = Thread(target=read_sensor, args=(tuple(map(3)),tuple(map(begin)),tuple(map(int,data[6]))))
+        d4Thread = Thread(target=read_sensor, args=(tuple(map(4)),tuple(map(begin)),tuple(map(int,data[8]))))
+        d1Thread.start()
+        d2Thread.start()
+        d3Thread.start()
+        d4Thread.start()
+        
         sensor1.append("data of sensor"+data[1]+","+data[2]+"secs")
         sensor2.append("data of sensor"+data[3]+","+data[4]+"secs")
         sensor3.append("data of sensor"+data[5]+","+data[6]+"secs")
@@ -147,3 +175,4 @@ def main():
         print("program exit")
         
 main()
+
