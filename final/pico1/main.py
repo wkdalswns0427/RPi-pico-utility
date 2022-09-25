@@ -17,18 +17,14 @@ def function1(endtime):
         if (time.time()-init) > endtime:
             break
         for i in range(3):
-            baton.acquire()
             if (time.time()-init) > endtime:
                 break
             uart1.write('1'.encode('utf-8'))
             time.sleep(1)
-            baton.release()
         if (time.time()-init) > endtime:
             break
-        baton.acquire()
         uart1.write('0'.encode('utf-8'))
         time.sleep(1)
-        baton.release()
     uart1.write("D".encode('utf-8'))
 
 def function2(endtime):
