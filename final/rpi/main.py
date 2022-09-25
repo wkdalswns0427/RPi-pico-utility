@@ -42,10 +42,6 @@ pico2_1 = serial.Serial(
   timeout = 0.1
 )
 
-msg = ""
-# DATA buffer list
-sensor1, sensor2, sensor3, sensor4 = [], [], [], []
-
 # check message for termination
 def confirm_end(msg):
     if msg == "D" or msg == "DN":
@@ -58,6 +54,8 @@ def main():
     a = input("input : ")
     data = a.split(",")
     no_of_sensors = int(data[0])
+    msg = ""
+    # DATA buffer list
     sensor1, sensor2, sensor3, sensor4 = [], [], [], []
     
     # <---------- use one sensor ----------> 
