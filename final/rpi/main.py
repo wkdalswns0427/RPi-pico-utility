@@ -57,6 +57,7 @@ def main():
     a = input("input : ")
     data = a.split(",")
     no_of_sensors = int(data[0])
+    sensor1, sensor2, sensor3, sensor4 = [], [], [], []
     
     # <---------- use one sensor ----------> 
     if no_of_sensors==1:
