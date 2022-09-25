@@ -23,9 +23,7 @@ will use uart ports on ttyAMA1 to ttyAMA4 of raspberry pi4
 
 ## CODES
 
-### Type 1
-
-using files in /type1
+### 1 Sensor
 
 This program chooses **one sensor**, and receives data via uart
 
@@ -36,11 +34,13 @@ This program chooses **one sensor**, and receives data via uart
 - open 'main.py' and run
 - type in sensor no(1,2 for dev1 / 3,4 for dev2) & time on terminal
 
+single sensor
+
+![Screenshot from 2022-09-22 10-39-37](https://user-images.githubusercontent.com/68832065/191639566-d77f5115-006d-4b3c-ae2e-30aca63defcb.png)
+
 ---
 
-### Type 2
-
-using files in /type2
+### 2 Sensors
 
 This program chooses **two sensors**, and receives data via uart
 
@@ -56,19 +56,13 @@ turn on "Thonny" on raspberry pi
 - open 'main.py' from pico and run (repeat for another pico)
 - type in sensor no & time according to protocol on terminal
 
-single sensor
-
-![Screenshot from 2022-09-22 10-39-37](https://user-images.githubusercontent.com/68832065/191639566-d77f5115-006d-4b3c-ae2e-30aca63defcb.png)
-
 double sensor
 
 ![Screenshot from 2022-09-22 10-25-52](https://user-images.githubusercontent.com/68832065/191638172-ce735787-d74b-48cd-a46a-a5e49ad87b93.png)
 
 ---
 
-### Type 4
-
-using files in /type2
+### 4 Sensors
 
 This program chooses **four sensors**, and receives data via uart
 
@@ -94,8 +88,4 @@ turn on "Thonny" on raspberry pi
 ---
 Connection Image
 
-![20220920_175545](https://user-images.githubusercontent.com/68832065/191214689-bde92233-fc61-4595-91fc-a26a63eef96a.jpg)
-
-UART PINMAP
-
-![Screenshot from 2022-09-16 10-28-28](https://user-images.githubusercontent.com/68832065/190536895-26a9b863-89ed-415a-84b4-b041fe700060.png)
+![뒤](https://user-images.githubusercontent.com/68832065/192139064-2021ef3a-270e-41a7-8ceb-30a1c882b999.jpg)
