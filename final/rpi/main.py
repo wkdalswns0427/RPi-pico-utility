@@ -24,7 +24,7 @@ pico1_1 = serial.Serial(
 
 #sensor4
 pico2 = serial.Serial(
-  port='/dev/ttyAMA4', # Change this according to connection methods, e.g. /dev/ttyUSB0
+  port='/dev/ttyAMA4',
   baudrate = 9600,
   parity=serial.PARITY_NONE,
   stopbits=serial.STOPBITS_ONE,
@@ -34,7 +34,7 @@ pico2 = serial.Serial(
 
 #sensor3
 pico2_1 = serial.Serial(
-  port='/dev/ttyAMA3', # Change this according to connection methods, e.g. /dev/ttyUSB0
+  port='/dev/ttyAMA3',
   baudrate = 9600,
   parity=serial.PARITY_NONE,
   stopbits=serial.STOPBITS_ONE,
@@ -43,6 +43,7 @@ pico2_1 = serial.Serial(
 )
 
 msg = ""
+# DATA buffer list
 sensor1, sensor2, sensor3, sensor4 = [], [], [], []
 
 # check message for termination
@@ -162,14 +163,10 @@ def main():
         pico2.write(senddata2.encode('utf-8'))
         begin = time.time()
         while True:
-            if (time.time() - begin)<int(data[2]):
-                d1 = pico1.read(1)
-            if (time.time() - begin)<int(data[4]):
-                d2 = pico1_1.read(2)
-            if (time.time() - begin)<int(data[8]):
-                d4 = pico2.read(2)
-            if (time.time() - begin)<int(data[6]):
-                d3 = pico2_1.read(1)
+            d1 = pico1.read(1)
+            d2 = pico1_1.read(2)
+            d3 = pico2_1.read(1)
+            d4 = pico2.read(2)
             msg1, msg2, msg3, msg4  = d1.decode('utf-8'), d2.decode('utf-8'), d3.decode('utf-8'), d4.decode('utf-8')
             # breaks loop when all sensors reach termination
             if confirm_end(msg1) or confirm_end(msg2) or confirm_end(msg3) or confirm_end(msg4):
