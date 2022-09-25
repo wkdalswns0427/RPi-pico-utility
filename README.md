@@ -85,6 +85,10 @@ turn on "Thonny" on raspberry pi
 - open 'main.py' and run
 - type in sensor no & time on terminal according to protocol
 
+quadro sensors
+
+![t4](https://user-images.githubusercontent.com/68832065/192141114-57d37158-2800-4339-bfdd-6ae57ce0799f.JPG)
+
 ---
 Connection Image
 
