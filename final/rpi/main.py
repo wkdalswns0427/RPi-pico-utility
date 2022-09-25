@@ -161,16 +161,27 @@ def main():
         pico2.write(senddata2.encode('utf-8'))
         begin = time.time()
         while True:
+            time.sleep(0.1)
             d1 = pico1.read(1)
             d2 = pico1_1.read(2)
             d3 = pico2_1.read(1)
             d4 = pico2.read(2)
             msg1, msg2, msg3, msg4  = d1.decode('utf-8'), d2.decode('utf-8'), d3.decode('utf-8'), d4.decode('utf-8')
             # breaks loop when all sensors reach termination
-            if confirm_end(msg1) or confirm_end(msg2) or confirm_end(msg3) or confirm_end(msg4):
+            if confirm_end(msg1):
+                print("s1 done")
                 flag += 1
-                if flag == 4:
-                    break
+            if confirm_end(msg2):
+                print("s2 done")
+                flag += 1
+            if confirm_end(msg3):
+                print("s3 done")
+                flag += 1
+            if confirm_end(msg4):
+                print("s4 done")
+                flag += 1
+            if flag == 4:
+                break
             sensor1.append(msg1)
             sensor2.append(msg2)
             sensor3.append(msg3)
